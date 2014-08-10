@@ -5,11 +5,11 @@
  * Secure bcrypt password hashing functions for user authentication.
  *
  * Based on bcrypt and the Portable PHP password hashing framework.
- * @see http://www.openwall.com/phpass/ 
+ * @see http://www.openwall.com/phpass/
  *      https://gist.github.com/1053158
  *
  * This is a custom version of Drupal's password hashing API.
- * 
+ *
  * It contains enhanced replacements for:
  *   user_hash_password()
  *   user_check_password()
@@ -20,19 +20,17 @@
  * bCryptic by Jonathan K Mickelson <jkmickelson.com>
  * This code is released in the public domain.
  * (Enhanced from Bcrypt original by Marco Arment <me@marco.org>)
- * 
+ *
  * Some alterations made by Dmitriy Novikov <dimmu.neivan@gmail.com>
- * 
+ *
  * THERE IS ABSOLUTELY NO WARRANTY.
- * 
+ *
  * Usage example:
- * 
  * // In a registration or password-change form:
  * $hash_for_user = bCryptic::hash($_POST['password']);
- * 
+ *
  * // In a login form:
  * $is_correct = bCryptic::check($_POST['password'], $stored_hash_for_user);
- * 
  * // In a login form when migrating entries gradually from a legacy SHA-1 hash:
  * $is_correct = bCryptic::check(
  *     $_POST['password'],
@@ -42,7 +40,6 @@
  * if ($is_correct && bCryptic::legacy_hash_status($stored_hash_for_user)!==0) {
  *     $user->store_new_hash(bCryptic::hash($_POST['password']));
  * }
- * 
  */
 
 class bCryptic {
@@ -386,7 +383,7 @@ function user_check_password($password, $account) {
 function user_needs_new_hash($account) {
   // It may be a legacy hash or the bcrypt work force may be out-of-bounds
   if (bCryptic::legacy_hash_status($account->pass) !== 0) {
-      return TRUE;
+    return TRUE;
   }
   return FALSE;
 }
